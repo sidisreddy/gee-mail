@@ -3,11 +3,62 @@
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
     <script>
+
+    var emails;
+
+    function showMessage(emailNode)
+{
+
+var msg = emailNode.getElementsByClassName('msg')[0].innerHTML;
+
+alert(msg);
+
+}
+
+
       window.onload = function(){
+
+      	emails = window.geemails;
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
+
+
+loadAllMessages();
+
+
       };
+
+
+function loadAllMessages()
+{
+
+	var contentBox = document.getElementById('main');
+
+
+	var output = "";
+
+	for (var i = 0; i < emails.length; i++)
+
+	{
+
+		output += "<div class='email' onclick='showMessage(this)'><span class='edate ct'>" + emails[i].date + "</span>" +  "<span class = 'sender ct'>" + emails[i].sender + " </span>" + "<span class='subject ct'>" + emails[i].subject +"</span><span class = 'msg ct'>" + emails[i].body + " </span><div>";
+
+		contentBox.innerHTML = output;
+	}
+
+
+var newMsg = getNewMessage();
+
+console.log('New Message ' + newMsg);
+
+emails.push(newMsg);
+
+setTimeout(loadAllMessages, 30000);
+
+console.log('Loading messages...');
+
+}
+
     </script>
 	</head>
 	<body>
